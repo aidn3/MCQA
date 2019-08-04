@@ -105,7 +105,7 @@ public class QACOPYCommand implements CommandExecutor, TabCompleter {
 
 	private boolean doPlayerCheck(ItemStack book, Player player) {
 		// no book to use/sacrifice
-		if (book == null || (book.getType() != Material.BOOK_AND_QUILL && book.getType() != Material.WRITTEN_BOOK)) {
+		if (book == null || (book.getType() != Material.WRITABLE_BOOK && book.getType() != Material.WRITTEN_BOOK)) {
 			Notifier.Commands.mustHoldBookToCopy(player);
 			return false;
 		}

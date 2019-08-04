@@ -42,7 +42,7 @@ public class QAADDCommand implements CommandExecutor {
 		int slot = inv.getHeldItemSlot();
 		ItemStack book = inv.getItem(slot);
 
-		if (book == null || (book.getType() != Material.BOOK_AND_QUILL && book.getType() != Material.WRITTEN_BOOK)) {
+		if (book == null || (book.getType() != Material.WRITABLE_BOOK && book.getType() != Material.WRITTEN_BOOK)) {
 			Notifier.Commands.mustHoldTheBookToAdd(sender);
 			return true;
 		}

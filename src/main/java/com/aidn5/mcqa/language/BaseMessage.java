@@ -1,28 +1,30 @@
+
 package com.aidn5.mcqa.language;
 
-import static org.bukkit.ChatColor.BOLD;
-import static org.bukkit.ChatColor.GOLD;
-import static org.bukkit.ChatColor.RED;
-import static org.bukkit.ChatColor.RESET;
-import static org.bukkit.ChatColor.WHITE;
+import static net.md_5.bungee.api.ChatColor.AQUA;
+import static net.md_5.bungee.api.ChatColor.BOLD;
+import static net.md_5.bungee.api.ChatColor.GOLD;
+import static net.md_5.bungee.api.ChatColor.GRAY;
+import static net.md_5.bungee.api.ChatColor.GREEN;
+import static net.md_5.bungee.api.ChatColor.RED;
+import static net.md_5.bungee.api.ChatColor.RESET;
+import static net.md_5.bungee.api.ChatColor.WHITE;
+import static net.md_5.bungee.api.ChatColor.YELLOW;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 
 import com.aidn5.mcqa.PluginConfig;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import net.minecraft.server.v1_12_R1.ChatComponentText;
-import net.minecraft.server.v1_12_R1.ChatHoverable;
-import net.minecraft.server.v1_12_R1.ChatHoverable.EnumHoverAction;
-import net.minecraft.server.v1_12_R1.ChatModifier;
-import net.minecraft.server.v1_12_R1.EnumChatFormat;
-import net.minecraft.server.v1_12_R1.PacketPlayOutChat;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.HoverEvent.Action;
+import net.md_5.bungee.api.chat.TextComponent;
+
 
 /**
  * Creates styled success,error and normal messages
@@ -31,93 +33,93 @@ import net.minecraft.server.v1_12_R1.PacketPlayOutChat;
  * @version 1.0
  */
 public class BaseMessage {
-	protected static final ChatColor neurtalColor = ChatColor.GRAY;
-	protected static final ChatColor primaryColor = ChatColor.YELLOW;
-	protected static final ChatColor secondaryColor = ChatColor.AQUA;
-	protected static final ChatColor errorColor = ChatColor.RED;
-	protected static final ChatColor successColor = ChatColor.GREEN;
+  protected static final ChatColor neurtalColor = GRAY;
+  protected static final ChatColor primaryColor = YELLOW;
+  protected static final ChatColor secondaryColor = AQUA;
+  protected static final ChatColor errorColor = RED;
+  protected static final ChatColor successColor = GREEN;
 
-	protected static final ChatComponentText baseMessage;
-	static {
-		// result: "[%modName%]: "
-		String logo = BOLD + "" + GOLD + "[";
-		logo += BOLD + "" + WHITE + PluginConfig.NAME;
-		logo += BOLD + "" + GOLD + "] " + RESET + neurtalColor;
+  protected static final BaseComponent baseMessage;
+  static {
+    // result: "[%modName%]: "
+    String logo = BOLD + "" + GOLD + "[";
+    logo += BOLD + "" + WHITE + PluginConfig.NAME;
+    logo += BOLD + "" + GOLD + "] " + RESET + neurtalColor;
 
-		baseMessage = new ChatComponentText(logo);
-	}
+    baseMessage = new TextComponent(logo);
+  }
 
-	protected static final ChatComponentText lineSeperator;
-	static {
-		lineSeperator = new ChatComponentText("");
+  protected static final TextComponent lineSeperator;
+  static {
+    lineSeperator = new TextComponent("");
 
-		ChatComponentText line = new ChatComponentText("--------------------");
-		line.getChatModifier().setColor(EnumChatFormat.valueOf(primaryColor.name()));
+    TextComponent line = new TextComponent("--------------------");
+    line.setColor(primaryColor);
 
-		lineSeperator.addSibling(line).addSibling(baseMessage).addSibling(line);
-	}
+    lineSeperator.addExtra(line);
+    lineSeperator.addExtra(baseMessage);
+    lineSeperator.addExtra(line);
+  }
 
-	public static void debugMessage(String message) {
-		// System.out.println(message);
-		// showMessage(GRAY + message);
-	}
+  public static void debugMessage(String message) {
+    System.out.println(message);
+    // showMessage(GRAY + message);
+  }
 
-	public static ChatComponentText createReportCrash(Throwable e) {
-		playErrorSoundEffect();
-		return createBaseError("mod crashed", e);
-	}
+  public static TextComponent createReportCrash(Throwable e) {
+    playErrorSoundEffect();
+    return createBaseError("mod crashed", e);
+  }
 
-	protected static ChatComponentText createBaseError(String msg, Throwable e) {
-		String textMessage = RED + "ERROR: " + msg;
-		ChatComponentText errorMessage = new ChatComponentText(textMessage);
+  protected static TextComponent createBaseError(String msg, Throwable e) {
+    String textMessage = RED + "ERROR: " + msg;
+    TextComponent errorMessage = new TextComponent(textMessage);
 
-		if (e != null) {
-			String hoverMessage = e.getMessage() + "\r";
+    if (e != null) {
+      String hoverMessage = e.getMessage() + "\r";
 
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			String sStackTrace = sw.toString();
-			pw.close();
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter(sw);
+      e.printStackTrace(pw);
+      String sStackTrace = sw.toString();
+      pw.close();
 
-			ChatModifier chatModifier = errorMessage.getChatModifier();
-			chatModifier.setChatHoverable(
-					new ChatHoverable(EnumHoverAction.SHOW_TEXT, new ChatComponentText(hoverMessage + sStackTrace)));
-		}
+      errorMessage.setHoverEvent(
+          new HoverEvent(Action.SHOW_TEXT,
+              new BaseComponent[] { new TextComponent(hoverMessage + sStackTrace) }));
+    }
 
-		return createBaseMessage(errorMessage);
-	}
+    return createBaseMessage(errorMessage);
+  }
 
-	protected static ChatComponentText createBaseMessage(String msg) {
-		return createBaseMessage(new ChatComponentText(msg));
-	}
+  protected static TextComponent createBaseMessage(String msg) {
+    return createBaseMessage(new TextComponent(msg));
+  }
 
-	protected static ChatComponentText createBaseMessage(ChatComponentText msg) {
-		ChatComponentText chat = new ChatComponentText("");
-		chat.addSibling(baseMessage).addSibling(msg);
-		return chat;
-	}
+  protected static TextComponent createBaseMessage(TextComponent msg) {
+    TextComponent chat = new TextComponent("");
+    chat.addExtra(baseMessage);
+    chat.addExtra(msg);
+    return chat;
+  }
 
-	public static void sendChatComponent(CommandSender sender, ChatComponentText chat) {
-		if (sender instanceof CraftPlayer) {
-			ByteBuf buf = Unpooled.buffer(256);
-			buf.setByte(0, (byte) 0);
-			buf.writerIndex(1);
+  public static void sendChatComponent(CommandSender sender, TextComponent chat) {
+    if (sender instanceof Player) {
+      Player player = (Player) sender;
+      player.spigot().sendMessage(chat);
 
-			PacketPlayOutChat playOutChat = new PacketPlayOutChat(chat);
-			((CraftPlayer) sender).getHandle().playerConnection.sendPacket(playOutChat);
-		} else {
-			sender.sendMessage(chat.getText());
-		}
-	}
+    } else {
+      sender.sendMessage(chat.getText());
+    }
+  }
 
-	protected static void playSoundEffect() {
-		// Minecraft.getMinecraft().thePlayer.playSound("minecraft:block.anvil.hit",
-		// 100, 1f);
-	}
+  protected static void playSoundEffect() {
+    // Minecraft.getMinecraft().thePlayer.playSound("minecraft:block.anvil.hit",
+    // 100, 1f);
+  }
 
-	protected static void playErrorSoundEffect() {
-		// Minecraft.getMinecraft().thePlayer.playSound("minecraft:block.anvil.hit",
-		// 100, 1f);
-	}
+  protected static void playErrorSoundEffect() {
+    // Minecraft.getMinecraft().thePlayer.playSound("minecraft:block.anvil.hit",
+    // 100, 1f);
+  }
 }

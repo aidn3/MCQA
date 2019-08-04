@@ -1,6 +1,6 @@
 package com.aidn5.mcqa;
 
-import net.minecraft.server.v1_12_R1.EnumColor;
+import org.bukkit.ChatColor;
 
 public class Constants {
 	/**
@@ -10,7 +10,7 @@ public class Constants {
 	 * 
 	 * Idea: give a copy of the content to the player as a book
 	 */
-	public static final String SERIAL_BOOK_ID = EnumColor.BLACK + "qa.book.id";
+	public static final String SERIAL_BOOK_ID = ChatColor.BLACK + "qa.book.id";
 	/**
 	 * the char, which is used as a chat-style indicator
 	 * <p>

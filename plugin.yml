@@ -4,7 +4,7 @@ version: 0.1
 author: aidn5
 description: add commands to add/view written guides/tutorials/tips for players
 website: github.com/aidn3
-api-version: 1.13
+api-version: 1.14
 commands:
    qa:
       description: search for contents/guides/tutorials

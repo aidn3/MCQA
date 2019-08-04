@@ -1,10 +1,10 @@
 package com.aidn5.mcqa.utils;
 
+import org.bukkit.ChatColor;
+
 import com.aidn5.mcqa.Constants;
 import com.aidn5.mcqa.PluginConfig;
 import com.aidn5.mcqa.core.dataholders.Content;
-
-import net.minecraft.server.v1_12_R1.EnumChatFormat;
 
 /**
  * On first creating the database. This content will be automatically added to
@@ -55,7 +55,7 @@ public class TutorialContent {
 	private static String contains() {
 		String answer = "";
 
-		answer += EnumChatFormat.BOLD + "Pages: " + lineSep + lineSep;
+		answer += ChatColor.BOLD + "Pages: " + lineSep + lineSep;
 		answer += "1. Plugin Info" + lineSep;
 		answer += "2. Contains (this page)" + lineSep;
 		answer += "3. Uses (1)" + lineSep;
@@ -71,7 +71,7 @@ public class TutorialContent {
 	private static String uses1() {
 		String answer = "";
 
-		answer += EnumChatFormat.BOLD + "Uses (1): " + lineSep + lineSep;
+		answer += ChatColor.BOLD + "Uses (1): " + lineSep + lineSep;
 		answer += "You can use the plugin to write guides, tutorials ";
 		answer += "or just contents for the players to use." + lineSep;
 
@@ -84,7 +84,7 @@ public class TutorialContent {
 	private static String uses2() {
 		String answer = "";
 
-		answer += EnumChatFormat.BOLD + "Uses (2): " + lineSep + lineSep;
+		answer += ChatColor.BOLD + "Uses (2): " + lineSep + lineSep;
 		answer += "examples: " + lineSep;
 		answer += "- How to claim?" + lineSep;
 		answer += "- Is (tldr) allowed?" + lineSep;
@@ -98,7 +98,7 @@ public class TutorialContent {
 	private static String problems() {
 		String answer = "";
 
-		answer += EnumChatFormat.BOLD + "Problems: " + lineSep + lineSep;
+		answer += ChatColor.BOLD + "Problems: " + lineSep + lineSep;
 		answer += "To ensure that contents don't exploit the plugin,";
 		answer += " all unacceptable chars are automatically removed ";
 		answer += "without a warning." + lineSep + lineSep;
@@ -114,7 +114,7 @@ public class TutorialContent {
 	private static String commandQA() {
 		String answer = "";
 
-		answer += EnumChatFormat.BOLD + "Command /qa: " + lineSep;
+		answer += ChatColor.BOLD + "Command /qa: " + lineSep;
 		answer += "Search for a question or get all saved questions." + lineSep + lineSep;
 
 		answer += "examples: " + lineSep;
@@ -129,7 +129,7 @@ public class TutorialContent {
 	private static String commandQAADD() {
 		String answer = "";
 
-		answer += EnumChatFormat.BOLD + "Command /qaadd:" + lineSep;
+		answer += ChatColor.BOLD + "Command /qaadd:" + lineSep;
 		answer += "Add new contents to the databases" + lineSep + lineSep;
 
 		answer += "Usage:" + lineSep;
@@ -144,7 +144,7 @@ public class TutorialContent {
 	private static String commandQAGET() {
 		String answer = "";
 
-		answer += EnumChatFormat.BOLD + "Command /qaget:" + lineSep;
+		answer += ChatColor.BOLD + "Command /qaget:" + lineSep;
 		answer += "get an answer from the database directly without searching." + lineSep + lineSep;
 
 		answer += "Usage:" + lineSep;
