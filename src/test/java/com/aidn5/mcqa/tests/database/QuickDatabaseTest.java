@@ -3,6 +3,7 @@ package com.aidn5.mcqa.tests.database;
 
 import com.aidn5.mcqa.core.content.Content;
 import com.aidn5.mcqa.core.database.IMcqaDatabase;
+import com.aidn5.mcqa.core.database.StorageException;
 import com.aidn5.mcqa.tests.DatabaseTestsKit;
 
 import java.util.Collection;
@@ -71,19 +72,17 @@ public class QuickDatabaseTest {
     DatabaseTestsKit.assertContents(content, content2);
   }
 
-  @Test
+  @Test(expected = StorageException.class)
   public void test_not_allowed_insert_same_content_properties() {
     Content content = DatabaseTestsKit.createDummyContent1();
 
     storageInterface.addContent(content);
 
-    try {
-      // since this content has no id
-      // It will not count as an overwrite, but as a new content.
-      // the question is already exists, so it must throw an error
-      storageInterface.addContent(content);
-      Assert.fail();
-    } catch (@SuppressWarnings("unused") Exception ignored) {}
+    // since this content has no id
+    // It will not count as an overwrite, but as a new content.
+    // the question is already exists, so it must throw an error
+    storageInterface.addContent(content);
+    Assert.fail();
   }
 
   @Test

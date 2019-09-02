@@ -176,19 +176,19 @@ public class ByteMcqaAdapter extends SplitMcqaAdapter {
     return os.toByteArray();
   }
 
-  public static void writeShort(OutputStream os, int s) throws IOException {
+  private static void writeShort(OutputStream os, int s) throws IOException {
     os.write((byte) ((s >>> 8) & 0xFF));
     os.write((byte) ((s >>> 0) & 0xFF));
   }
 
-  public static void writeInt(OutputStream os, int i) throws IOException {
+  private static void writeInt(OutputStream os, int i) throws IOException {
     os.write((byte) ((i >>> 24) & 0xFF));
     os.write((byte) ((i >>> 16) & 0xFF));
     os.write((byte) ((i >>> 8) & 0xFF));
     os.write((byte) ((i >>> 0) & 0xFF));
   }
 
-  public static int readInt(ByteBuffer bf) {
+  private static int readInt(ByteBuffer bf) {
     int ch1 = bf.get();
     int ch2 = bf.get();
     int ch3 = bf.get();
@@ -196,7 +196,7 @@ public class ByteMcqaAdapter extends SplitMcqaAdapter {
     return (ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0);
   }
 
-  public static void writeLong(OutputStream os, long l) throws IOException {
+  private static void writeLong(OutputStream os, long l) throws IOException {
     os.write((byte) (l >>> 56));
     os.write((byte) (l >>> 48));
     os.write((byte) (l >>> 40));

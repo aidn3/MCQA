@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
+
+/*
+ * CheckStyle: javadoc is disabled on this File.
+ */
 class ContentParser {
   private static final Pattern CONTENT_ID = Pattern.compile("{content_id}", Pattern.LITERAL);
   private static final Pattern CONTENT_DATE = Pattern.compile("{content_date}", Pattern.LITERAL);

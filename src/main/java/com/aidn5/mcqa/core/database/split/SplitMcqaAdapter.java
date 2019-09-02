@@ -31,8 +31,7 @@ import javax.annotation.Nullable;
  * adapter has the best question search query, but also one of the slowest
  * adapter.
  * 
- * <p>
- * <b>The search query for this adapter goes like this:</b> Check if
+ * <p><b>The search query for this adapter goes like this:</b> Check if
  * <ul>
  * <li>the whole query matches the question</li>
  * <li>the whole query matches the start of the question</li>
@@ -40,8 +39,7 @@ import javax.annotation.Nullable;
  * <li>the number of words matches the question</li>
  * </ul>
  * 
- * <p>
- * <b>Understanding of the adapter:</b>
+ * <p><b>Understanding of the adapter:</b>
  * The file name is the id of the content with the extension ".content" (e.g.
  * "2.content"). Another file with the name "settings.txt" will be created. The
  * file only holds the current ID increment. the whole dictionary will be

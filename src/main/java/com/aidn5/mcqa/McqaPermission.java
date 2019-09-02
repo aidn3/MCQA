@@ -43,7 +43,7 @@ public class McqaPermission {
   public static final String COPY_CONTENTS = "mcqa.copyContents";
   /**
    * Whether the person can copy contents to a book (or book and quill) and
-   * <i>bypass the requirement of sacrificing a book from their inventory.</i>
+   * <i>bypass the requirement of sacrificing a book from their inventory</i>.
    */
   public static final String BypassCopyContentsRequireBook = "mcqa.copyContents.bypassRequireBook";
 

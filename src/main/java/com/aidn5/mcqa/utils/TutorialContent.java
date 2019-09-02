@@ -1,7 +1,6 @@
 
 package com.aidn5.mcqa.utils;
 
-import com.aidn5.mcqa.Constants;
 import com.aidn5.mcqa.PluginConfig;
 import com.aidn5.mcqa.core.content.Content;
 
@@ -16,7 +15,7 @@ import org.bukkit.ChatColor;
  */
 public class TutorialContent {
   private static final String question = "how to use " + PluginConfig.NAME.toLowerCase();
-  private static final String lineSep = Constants.CHAT_FORMAT + "0\n";
+  private static final String lineSep = ChatColor.COLOR_CHAR + "0\n";
 
   /**
    * Get the content to add to the database.

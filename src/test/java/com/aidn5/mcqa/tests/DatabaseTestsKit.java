@@ -27,6 +27,22 @@ public class DatabaseTestsKit {
     throw new AssertionError();
   }
 
+  /**
+   * Get a database interface to test it.
+   * 
+   * @param dabaseType
+   *          the database type to get. Check {@link DatabaseFactory} for all
+   *          types.
+   * @param clean
+   *          <code>true</code> to clean the database from any content. Used to
+   *          start a fresh start.
+   * 
+   * @return
+   *         database interface for testing.
+   * 
+   * @throws Exception
+   *           if any error occurs while creating the adapter.
+   */
   public static IMcqaDatabase getStorageInterface(String dabaseType, boolean clean)
       throws Exception {
 
@@ -60,6 +76,12 @@ public class DatabaseTestsKit {
     throw new RuntimeException("dabaseType not exists: " + dabaseType);
   }
 
+  /**
+   * Create a unique dummy {@link Content} for testing.
+   * 
+   * @return
+   *         dummy {@link Content} for testing.
+   */
   public static Content createDummyContent1() {
     Content content = new Content();
 
@@ -78,6 +100,12 @@ public class DatabaseTestsKit {
     return content;
   }
 
+  /**
+   * Create a unique dummy {@link Content} for testing.
+   * 
+   * @return
+   *         dummy {@link Content} for testing.
+   */
   public static Content createDummyContent2() {
     Content content = createDummyContent1();
     content.category = "categoryyyy";
@@ -88,6 +116,12 @@ public class DatabaseTestsKit {
     return content;
   }
 
+  /**
+   * Create a unique dummy {@link Content} for testing.
+   * 
+   * @return
+   *         dummy {@link Content} for testing.
+   */
   public static Content createDummyContent3() {
     Content content = createDummyContent2();
     content.category = "whatcategory";
@@ -98,7 +132,14 @@ public class DatabaseTestsKit {
     return content;
   }
 
-  // used to test how good can database handle these contents
+  /**
+   * Create a unique dummy {@link Content} for testing.
+   * This dummy contains chars and other formats that don't meet the standards.
+   * It is used to test how good can database handle these type of contents.
+   * 
+   * @return
+   *         dummy {@link Content} for testing.
+   */
   public static Content createWorstContent() {
     Content content = new Content();
     content.addedAt = -24542546;

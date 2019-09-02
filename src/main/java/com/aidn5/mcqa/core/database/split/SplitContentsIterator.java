@@ -37,12 +37,9 @@ public class SplitContentsIterator implements IContentsIterator {
    * @param instance
    *          an instance from the parent database used to get the content by
    *          {@link IMcqaDatabase#getContent(long)}.
-   * @param contents
-   *          the contents id to iterate through and get.
-   * @param onlyApprovedContents
-   *          whether the contents should be approved by the staff to be viewed.
-   *          If <code>true</code> the contents without the approved tag will be
-   *          ignored.
+   * @param contentsIds
+   *          the contents id to iterate through and get to use with
+   *          {@link IMcqaDatabase#getContent(long)}.
    * 
    * @throws NullPointerException
    *           if {@code instance} or {@code contentsIds} is <code>null</code>

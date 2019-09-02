@@ -88,11 +88,11 @@ public class Content implements Serializable {
 
 
   /**
-   * create new instance to use, hold data or add to the database
+   * create new instance to use, hold data or add to the database.
    * 
    * @param category
    *          the category of the questions
-   * @param isProved
+   * @param isApproved
    *          is the content of the questions and answer are proved/made by an
    *          Authority
    * @param questionContent
@@ -161,8 +161,7 @@ public class Content implements Serializable {
    * Convert the given {@code UUID} to {@link String}. <code>null</code> will be
    * returned, if the given {@code UUID} is <code>null</code>.
    * 
-   * <p>
-   * <code>
+   * <p><code>
    * return uuid != null ? uuid.toString() : null;
    * </code>
    * 

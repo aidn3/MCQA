@@ -25,7 +25,7 @@ import java.util.Map.Entry;
  * @see ByteMcqaAdapter
  */
 public class MemoryMcqaAdapter extends SplitMcqaAdapter {
-  HashMap<Long, Content> contents = new HashMap<>();
+  private HashMap<Long, Content> contents = new HashMap<>();
 
   /**
    * Constructor for the adapter.

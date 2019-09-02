@@ -32,7 +32,7 @@ public class QaGetCommand implements CommandExecutor {
     int id;
     try {
       id = Integer.parseInt(args[0]);
-    } catch (Exception ignored) {
+    } catch (@SuppressWarnings("unused") Exception ignored) {
       mcqa.getLanguage().invalidId(sender);
       return true;
     }
