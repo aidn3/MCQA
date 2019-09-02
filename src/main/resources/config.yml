@@ -1,0 +1,37 @@
+Config:
+#DO NOT CHANGE!
+   ConfigVersion: 1.0
+
+   Answer:
+      ShortestLength: 32
+      LongestLength: 32000
+
+   Question:
+      ShortestLength: 4
+      LongestLength: 128
+
+   Category:
+      ShortestLength: 3
+      LongestLength: 16
+
+   Database:
+# Json: Creates data folder and save every individual content in a file encoded by JSON.
+# It also cache the number of contents and their index for faster lookup (instead of using I/O. 
+# Recommended for less than 10000 contents.
+
+# SQLite: Creates a database in flat file. The number of contents will not effect the memory usage.
+# The only down side is if the contents are bigger than 200MB, which can cause down in performance.
+
+# SQLiteInMemory: creates a database in the memory, which means it can use too much memory.
+# The database will be lost on reload/crash/etc., but on the other hand it offers high speed.
+
+      # available: Json/SQLite/SQLiteInMemory/MySql
+      Type: json
+
+      TablePrefix: 'mcqa_'
+
+      MySql:
+         dsn: 'jdbc:mysql://[HOSTNAME]:[PORT]/[DATABASE]'
+         Username: 'root'
+         Password: ''
+         MaxConnections: 5

@@ -1,0 +1,98 @@
+main: com.aidn5.mcqa.Mcqa
+name: MCQA
+version: 0.3
+author: aidn5
+description: add commands to add/view written guides/tutorials/tips for players
+website: github.com/aidn3
+api-version: 1.14
+softdepend:
+- PlaceholderAPI
+commands:
+   qa:
+      description: search for contents/guides/tutorials
+      usage: /qa <search>
+      permission: mcqa.viewContents
+   qaget:
+      description: get and view Contents/guides/tutorials
+      usage: /<command> <content id>
+      permission: mcqa.viewContents
+   qaadd:
+      description: add new contents
+      usage: /<command> <category> <question>
+      permission: mcqa.addContents
+   qadel:
+      description: remove a content
+      usage: /<command> <content id>
+      permission: mcqa.removeContents
+   qacopy:
+      description: copy content to the held book
+      usage: /<command> <content id>
+      permission: mcqa.copyContents
+   qaprove:
+      description: approve the new content to by viewed by the public
+      usage: /<command> <content id>
+      permission: mcqa.approveContents
+   qaadmin:
+      description: admin only commands
+      usage: /<command> help
+      permission: mcqa.admin
+permissions:
+   mcqa.viewContents:
+      description: Allow to view the contents
+      default: true
+   mcqa.getAllContents:
+      description: Allow to view all contents (approved and not approved)
+      children:
+         mcqa.viewContents: true
+   mcqa.approveContents:
+      description: Allow to approve contents to be seen by the public
+      children:
+         mcqa.viewContents: true
+         mcqa.getAllContents: true
+   mcqa.addContents:
+      description: Allow to add new contents
+      children:
+         mcqa.viewContents: true
+   mcqa.removeContents:
+      description: Allow to remove contents
+      children:
+         mcqa.viewContents: true
+   mcqa.copyContents:
+      description: Allow to copy contents to book
+      children:
+         mcqa.viewContents: true
+      default: true
+   mcqa.copyContents.bypassRequireBook:
+      description: By pass the error when not holding a book and want a copy
+      children:
+         mcqa.viewContents: true
+         mcqa.copyContents: true
+   mcqa.editContents:
+      description: Allow to edit/add more contents
+      children:
+         mcqa.viewContents: true
+         mcqa.addContents: true
+         mcqa.copyContents: true
+   mcqa.admin:
+      description: Allow to access command /qaadmin and view info about the database but not to execute anything
+   mcqa.admin.reload:
+      description: Allow to enable/disable the database and reload plugin
+   mcqa.admin.migrate:
+      description: Allow to migrate data from database to another
+   mcqa.admin.book:
+      description: Get Tutorial book
+   mcqa.*:
+      description: Wildcard MCQA permission
+      default: op
+      children:
+         mcqa.viewContents: true
+         mcqa.getAllContents: true
+         mcqa.approveContents: true
+         mcqa.addContents: true
+         mcqa.editContents: true
+         mcqa.copyContents: true
+         mcqa.copyContents.bypassRequireBook: true
+         mcqa.admin: true
+         mcqa.admin.book: true
+         mcqa.admin.reload: true
+         mcqa.admin.migrate: true

@@ -1,6 +1,9 @@
 
 package com.aidn5.mcqa.utils;
 
+import com.aidn5.mcqa.Constants;
+import com.aidn5.mcqa.core.content.Content;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -11,69 +14,73 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
-import com.aidn5.mcqa.Constants;
-import com.aidn5.mcqa.core.dataholders.Content;
-
 import xyz.upperlevel.spigot.book.BookUtil;
 
 /**
- * Util helps with crafting MCQA-books and provide methods to show the players
- * its contents
+ * Utils helps with crafting Mcqa-books and provide methods to show the players
+ * its contents.
  * 
  * @author aidn5
  *
  */
 public class Book {
   /**
-   * give the book to the player, send packet to open it up and then remove the
-   * book from their inventory.
-   * <p>
-   * The original item in their inventory will be saved, replaced with book (to
-   * open) then restored
+   * make the player view book's content.
    * 
    * @param book
    *          the book to open
    * @param player
-   *          the player to show
+   *          the player to show the book to
    */
   public static void showBook(ItemStack book, Player player) {
     BookUtil.openPlayer(player, book);
   }
 
   /**
-   * Craft MCQA book and add {@link Constants#SERIAL_BOOK_ID} to its
-   * {@link BookMeta#getLore()} at 0 index to be identified as MCQA-book
-   * 
+   * Create new book with all the content.
    * 
    * @param content
-   *          the content to use to craft the book
-   * 
+   *          the content to write in book.
+   * @param questionIndex
+   *          what question was the asker used to get these contents.
+   *          Used to put this particular question as display name.
    * @param isWritten
-   *          TRUE to use {@link Material#WRITTEN_BOOK}. FALSE to use
-   *          {@link Material#BOOK_AND_QUILL}
+   *          <code>true</code> if the book should be unchangeable.
+   * @param proved
+   *          <code>true</code> if the answer should be the approved one.
    * 
-   * @return a crafted book contains the content and assigned as MCQA-book
-   * 
+   * @return
+   *         book as item contains the content ready to be sent to the player.
    */
-  public static ItemStack createBook(Content content, boolean isWritten) {
+  public static ItemStack createBook(Content content, int questionIndex, boolean isWritten,
+      boolean proved) {
     ItemStack book = new ItemStack(
-        isWritten ? Material.WRITTEN_BOOK : Material.LEGACY_BOOK_AND_QUILL);
+        isWritten ? Material.WRITTEN_BOOK : Material.WRITABLE_BOOK);
 
     BookMeta bookMeta = (BookMeta) book.getItemMeta();
 
-    bookMeta.setDisplayName(content.getQuestionContent());
-    bookMeta.setAuthor(content.getQuestionCreator());
-    bookMeta.setTitle(content.getQuestionContent());
-    bookMeta.addPage(content.getAnswerProvedContent().split(Constants.ANSWER_SPIRATOR));
+    bookMeta.setDisplayName(content.questions[questionIndex]);
+    bookMeta.setAuthor(content.questionCreator.toString());
+    bookMeta.setTitle(content.questions[questionIndex]);
+    if (proved) {
+      bookMeta.addPage(content.answerProvedContent);
+
+    } else {
+      bookMeta.addPage(content.answerUnProvedContent);
+    }
 
     List<String> description = new ArrayList<>();
     description.add(ChatColor.BLACK + Constants.SERIAL_BOOK_ID);
-    description.add("id: " + content.getContentId());
-    description.add("Category: " + content.getCategory());
-    description.add("question: " + content.getQuestionContent());
+    description.add("id: " + content.contentId);
+    description.add("Category: " + content.category);
+    description.add("question: " + content.questions[0]);
+    if (!proved) {
+      description.add("author of new content: " + content.creatorOfUnprovedAnswer.toString());
+      description.add("This book is not available for the public.");
+    }
 
     Calendar cal = Calendar.getInstance();
-    cal.setTimeInMillis(content.getAddedAt() * 1000);
+    cal.setTimeInMillis(content.addedAt * 1000);
 
     description.add("created at: " + cal.getTime().toString());
     bookMeta.setLore(description);

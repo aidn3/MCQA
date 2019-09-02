@@ -1,0 +1,79 @@
+Language:
+# Use-able variables: 
+# Content's info {content_%variable%}: id, category, date, author, question
+# PlaceHolderApi is also available.
+# {OpenableContentsInfo} can be used if all contents variable are available.
+
+   # {prefix} can always be used
+   Prefix: '&6[&fMCQA&6] &7'
+
+   ShowContentsInfo: "{prefix} &fContent's Info: &e{OpenableContentsInfo}&f."
+   
+   # (All Content variables are available.)
+   OpenableContentsInfo:
+      - '&aClick to open the Content!'
+      - '&r'
+      - '&fInfo to &7#{content_id}' 
+      - '&fCategory: &7{content_category}'
+      - '&fCreated at: &7{content_date}'
+      - '&fAuthor: &7{content_author}'
+
+   #use '' or null to remove it. Use '&r' to leave a line blank.
+   ShowSearch:
+      Header: '--------------------{prefix}--------------------'
+      # {count} is available as the counter for the list.
+      # (All Content variables are available.)
+      Content: '{prefix} {count}. {OpenableContentsInfo}'
+      Footer: '&r'
+
+   # {content_id} is available
+   ContentNotFound: '{prefix} &cNo such Content with the id #{content_id} found.'
+   NoContent: '{prefix} &cNo Content to view.'
+   InvalidId: '{prefix} &cInvalid ID.'
+
+   CategorySanitizeProblem: '{prefix} &cCategory must only contain Alphabet chars.'
+   CategoryLengthProblem: '{prefix} &cCategory must be between {shortest} and {longest} length.'
+   
+   ContentSanitizeProblem: '{prefix} &cContent must only contain Alphabet, Numbers, Common special chars.'
+   ContentLengthProblem: '{prefix} &cAnswer must be between {shortest} and {longest} length.'
+
+   QuestionSanitizeProblem: '{prefix} &cquestion must only contains Alphanumeric chars.'
+   QuestionLengthProblem: '{prefix} &cQuestion must be between {shortest} and {longest} length.'
+
+   NoPermissionToUse: '{prefix} &cYou do not have permission to perform this action.'
+   NoPermissionToView: '{prefix} &cYou do not have permission to view #{content_id}.'
+
+   MustHoldBookToUpload: '{prefix} &cYou must hold the Book you want to upload!'
+   MustHoldBookToCopy: '{prefix} &cYou must hold a Book to copy.'
+   # Can't execute the action from console
+   MustBePlayerWithInventory: '{prefix} &cYou must be a player with an inventory to execute this command.'
+   # Can't copy the content to this book.
+   BookNotYours: "{prefix} &cBook must be either yours, not signed or MCQA's book."
+
+   # (All Content variables are available.)
+   ContentAdded: '{prefix} &aNew Content has been created!'
+   # (All Content variables are available.)
+   ContentAddedWaitingForApproval: '{prefix} &aNew Content has been created! &7waiting for approval of a staff.'
+   # {content_id} is available
+   ContentRemoved: '{prefix} &aContent removed! &e{content_question}.'
+   # {content_id} is available
+   NoContentToRemove: '{prefix} &cCould not found the content to remove.'
+
+   PluginReloaded: '{prefix} &ePlugin reloaded'
+   PluginNotReloaded: '{prefix} &cPlugin could not reload. Check the console/log.'
+   TutorialBookReceived: '{prefix} &aTutorial book is received.'
+   DatabaseAlreadyDisabled: '{prefix} &cDatabase already disabled.'
+   FeatureDisabled: '{prefix} &cThis feature is disabled.'
+   
+   HelpReload: '{prefix} /qaadmin reload &f- &eReload the database.'
+   HelpMigrate: '{prefix} /qaadmin migrate [from] <to> &f- &eSend all contents to new database.'
+   HelpBook: '{prefix} /qaadmin book &f- &eShow tutorial book.'
+   HelpHelp: '{prefix} /qaadmin help &f- &eexplain commands.'
+   HelpInfo: '{prefix} /qaadmin info &f- &eShow the current status.'
+   HelpQa: '{prefix} /qa <question> &f- &eSearch for content.'
+   HelpQaadd: '{prefix} /qaadd <category> <question> &f- &eAdd new contents.'
+   HelpGet: '{prefix} /qaget <#id> &f- &eView Contents/guides/tutorials.'
+   HelpDel: '{prefix} /qadel <#id> &f- &eDelete Contents.'
+   
+   
+

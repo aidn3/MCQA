@@ -1,0 +1,21 @@
+# eclipse
+bin
+lib
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# maven/IDE/run/other
+TestDir
+target
+release
+eclipse
+run
